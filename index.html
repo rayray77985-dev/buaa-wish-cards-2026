@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f9f8f4"><meta name="description" content="120张来自宁夏的手写心愿卡。和北航蓝天志愿者协会一起，让小小心愿，被温柔看见。">
+<meta property="og:title" content="你的心愿我来圆 · 北航蓝天"><meta property="og:description" content="120张手写心愿卡，等待与你相遇。">
+<title>你的心愿我来圆 · 北航蓝天志愿者协会</title>
+<link rel="icon" href="assets/xiaogu-love.png"><link rel="stylesheet" href="style.css"><script defer src="cards.js"></script><script defer src="vendor/qrcode.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#wishes">跳到心愿卡</a>
+<header class="nav"><a href="#" class="brand" aria-label="北航蓝天志愿者协会 首页"><img src="assets/xiaogu-love.png" alt="" width="40" height="40"><span>北航蓝天<small>志愿者协会</small></span></a><nav aria-label="主导航"><a href="#wishes">心愿放映室</a><a href="#about" class="about-nav">关于活动</a><button class="share-trigger pill" type="button">分享心愿 <span aria-hidden="true">↗</span></button></nav></header>
+<main>
+<section class="hero wrap" aria-labelledby="hero-title">
+<div class="hero-copy"><p class="eyebrow"><span class="tiny-star" aria-hidden="true">✦</span> 2026 · 你的心愿我来圆</p><h1 id="hero-title">小小心愿，<br>等一个<span class="blue-word">温暖的你<svg viewBox="0 0 390 22" aria-hidden="true"><path d="M4 16Q180-4 385 9"/></svg></span>。</h1><p class="intro">从宁夏的课堂，到北航的你。<br>120 张亲手制作的心愿卡，<br class="mobile-br">藏着孩子们认真写下的小小期待。</p><a class="primary" href="#wishes">遇见一份心愿 <span aria-hidden="true">↓</span></a><div class="hero-note"><span class="live-dot" aria-hidden="true"></span> 两所小学 · 120 张手写心愿卡</div></div>
+<div class="hero-art" aria-hidden="true"><div class="orbit"></div><span class="spark spark-one">✦</span><span class="spark spark-two">✧</span><span class="little-heart">♡</span><div class="postcard postcard-back"><img src="assets/xm/009-thumb.jpg" alt=""><span>来自新民小学的小小期待</span></div><div class="postcard postcard-front"><span class="tape"></span><img src="assets/xs/054-thumb.jpg" alt=""><span>每一笔，都是认真的心愿。</span></div><img class="hero-mascot" src="assets/xiaogu-love.png" alt=""><div class="mascot-bubble">心愿已送达，<br>温暖待签收 ♡</div><span class="art-caption">WITH LOVE, FROM NINGXIA</span></div>
+</section>
+<section id="wishes" class="wish-section wrap" aria-labelledby="wish-title"><div class="section-heading"><div><p class="eyebrow">THE WISH ROOM</p><h2 id="wish-title">打开一张，读懂一份期待<span class="yellow-star" aria-hidden="true">✦</span></h2><p class="section-sub">两所学校，两扇通往小小心愿的窗。点击卡片，放大看看。</p></div><button id="autoplay" class="play-toggle" type="button" aria-pressed="true"><span id="play-icon" aria-hidden="true">Ⅱ</span><span id="play-label">暂停轮播</span></button></div><div id="schools" class="school-columns"></div><p class="gallery-tip">轻点放大 · 左右翻页 · 记下编号，让心愿与你相遇</p><noscript><p>请开启 JavaScript 以浏览全部心愿卡。你也可以<a href="assets/xs/001.jpg">查看兴盛小学第一张心愿卡</a>。</p></noscript></section>
+<section id="about" class="about-section wrap" aria-labelledby="about-title"><div class="about-illustration"><img src="assets/xiaogu-happy.png" alt="开心的蓝小咕" width="140" height="140"><span class="about-sticker">把温暖，送远一点。</span></div><div class="about-copy"><p class="eyebrow">A LITTLE WISH, A LOT OF LOVE</p><h2 id="about-title">让山那边的心愿，<br>在这里得到回应。</h2><p>「你的心愿我来圆」是北航蓝天志愿者协会的志愿活动。今年，我们与宁夏的兴盛小学、新民小学对接，收集孩子们亲手制作的心愿卡，邀请北航师生一起帮助实现他们的心愿。</p><p class="claim-note">遇见想回应的心愿？请记下<strong>学校与卡片编号</strong>，关注「北航蓝天志愿者协会」微信公众号，按当期活动推送中的方式认领。具体安排以公众号发布为准。</p><a class="text-link" href="https://mp.weixin.qq.com/s/lU9tCm4wdlReEbO1hIbmCg" target="_blank" rel="noopener">看看往期的温暖故事 <span aria-hidden="true">↗</span></a></div></section>
+<section class="closing wrap"><p>一份心愿，一次相遇。<br><strong>谢谢你，让温暖发生。</strong></p><button class="share-trigger primary" type="button">把心愿分享给更多人 <span aria-hidden="true">↗</span></button></section>
+</main>
+<footer class="wrap"><span>北航蓝天志愿者协会</span><span>你的心愿我来圆 · 2026</span><span>蓝小咕陪你，把爱送达 <span class="footer-heart">♡</span></span></footer>
+<div id="viewer" class="viewer" role="dialog" aria-modal="true" aria-labelledby="viewer-title" hidden>
+<div class="viewer-top"><div><strong id="viewer-title"></strong><span id="viewer-counter"></span></div><button id="viewer-close" class="round dark" aria-label="关闭大图" type="button">×</button></div>
+<div id="image-stage" class="image-stage"><div id="image-frame" class="image-frame"><img id="viewer-image" alt="" draggable="false"></div><p id="image-status" class="image-status" role="status"></p></div>
+<button id="viewer-prev" class="round dark viewer-prev" aria-label="上一张心愿卡" type="button">‹</button><button id="viewer-next" class="round dark viewer-next" aria-label="下一张心愿卡" type="button">›</button>
+<div class="viewer-bottom"><div class="viewer-tools"><button id="zoom-out" type="button" aria-label="缩小照片">−</button><button id="zoom-reset" type="button" aria-label="重置缩放">100%</button><button id="zoom-in" type="button" aria-label="放大照片">＋</button><span class="tool-divider"></span><button id="rotate" type="button" aria-label="顺时针旋转照片">↻</button></div><button id="copy-card" class="copy-card" type="button">复制心愿编号</button><p>左右滑动翻页 · 双指缩放 · 放大后拖动查看</p></div>
+</div>
+<div id="share-dialog" class="share-overlay" role="dialog" aria-modal="true" aria-labelledby="share-title" hidden><div class="share-card"><button id="share-close" class="round" aria-label="关闭分享" type="button">×</button><p class="eyebrow">SHARE A LITTLE LOVE</p><h2 id="share-title">让更多心愿，被看见。</h2><img id="share-qr" hidden alt="扫描二维码，打开心愿卡展示网页" class="qr" width="232" height="232"><p id="share-help">微信扫一扫，或长按识别二维码</p><button id="copy-link" class="primary" type="button">复制网页链接 <span aria-hidden="true">↗</span></button><p class="share-small">也可以使用微信右上角「···」分享给朋友</p></div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+</body></html>
