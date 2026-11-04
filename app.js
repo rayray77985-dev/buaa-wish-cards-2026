@@ -3,6 +3,9 @@
   const $ = id => document.getElementById(id);
   const schools = window.WISH_SCHOOLS;
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
+  // Use a release-specific address so a newly shared link avoids stale page caches.
+  shareUrl.search = '';
+  shareUrl.searchParams.set('v', '20261104-readable3');
   const canonical = shareUrl.href;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;
