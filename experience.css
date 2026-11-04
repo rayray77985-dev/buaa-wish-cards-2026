@@ -19,6 +19,7 @@ main a,main button,main summary { scroll-margin-block:110px; }
 @keyframes letter-float { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-7px) rotate(1deg)} }
 .letter-ribbon { display:flex; align-items:center; gap:20px; padding:25px 0 32px; border-bottom:1px solid var(--line); }
 .ribbon-symbol { width:54px; height:54px; border:1px solid #dce6e8; border-radius:50%; display:grid; place-items:center; color:#457d98; font-size:30px; flex-shrink:0; }
+.ribbon-xiaogu { width:76px; height:76px; object-fit:contain; border-radius:18px; transform:rotate(-5deg); flex-shrink:0; }
 .letter-ribbon p { font-size:20px; font-weight:500; margin:0; letter-spacing:.5px; }
 .ribbon-sign { margin-left:auto; font-size:14px; color:var(--muted); white-space:nowrap; }
 .ribbon-br { display:none; }
@@ -41,6 +42,9 @@ main a,main button,main summary { scroll-margin-block:110px; }
 .story-label .eyebrow { font-size:14px; }
 .story-label>span { font-size:24px; line-height:1.8; color:#7a939f; }
 .story-intro h2 { font-size:34px; line-height:1.6; font-weight:650; margin:0 0 28px; letter-spacing:-.5px; }
+.story-first,.story-bridge,.wish-quote { display:block; }
+.story-bridge { font-size:20px; font-weight:400; color:var(--muted); margin-block:10px; }
+.wish-quote { white-space:nowrap; font-size:clamp(21px,3vw,34px); color:#345d74; }
 .story-intro p:not(.eyebrow) { font-size:18px; line-height:2; color:var(--muted); margin:0 0 18px; }
 .story-intro strong { font-weight:600; color:#345d74; }
 .memories-section { background:#edf2f2; padding:66px 0 50px; overflow:hidden; }
@@ -74,6 +78,15 @@ main a,main button,main summary { scroll-margin-block:110px; }
 .participate-note p { font-size:15px; color:var(--muted); line-height:1.9; margin:10px 0 0; max-width:650px; }
 .account-copy { background:white; border:1px solid #dae5e8; border-radius:99px; padding:12px 18px; min-height:48px; flex-shrink:0; color:#345d74; font-size:15px; }
 .account-copy span { margin-left:10px; }
+.account-actions { display:flex; flex-direction:column; align-items:center; flex-shrink:0; gap:6px; }
+.article-link { display:inline-flex; align-items:center; justify-content:center; gap:16px; background:#2b5c77; color:#fff; border-radius:99px; padding:12px 20px; min-height:48px; font-size:16px; }
+.account-actions .account-copy { background:transparent; border:0; font-size:15px; padding:8px 12px; min-height:44px; }
+.faq-xiaogu { display:block; width:112px; height:112px; object-fit:contain; margin:28px 0 0; border-radius:22px; transform:rotate(-4deg); }
+.faq-list a { color:#285e7a; text-decoration:underline; text-underline-offset:4px; }
+.history-links { display:flex; justify-content:center; flex-wrap:wrap; gap:0 18px; margin-top:16px; }
+.history-links .history-link { margin:0; width:auto; min-height:44px; }
+@media(hover:hover) { .article-link:hover { background:#17435f; } .chance-button:hover { background:#eef4f5; } }
+.school-switch button:active,.chance-button:active,.article-link:active { transform:scale(.97); }
 .faq-section { margin-top:var(--chapter-space); display:grid; grid-template-columns:.7fr 1.3fr; gap:70px; }
 .faq-section .eyebrow { font-size:14px; line-height:1.8; }
 .faq-section h2 { font-size:30px; font-weight:600; line-height:1.5; margin:0; }
@@ -133,6 +146,8 @@ body.memory-open { overflow:hidden; }
   .letter-ribbon p { font-size:18px; line-height:1.65; letter-spacing:0; }
   .ribbon-br { display:block; }
   .ribbon-sign { margin-left:58px; font-size:14px; }
+  .ribbon-xiaogu { width:58px; height:58px; border-radius:14px; }
+  .letter-ribbon .ribbon-sign { margin-left:72px; }
   .wish-section { padding-top:40px; }
   .gallery-toolbar { display:flex; flex-wrap:wrap; gap:14px; }
   .school-switch { width:100%; padding:4px; }
@@ -154,6 +169,8 @@ body.memory-open { overflow:hidden; }
   .story-label .eyebrow { font-size:14px; }
   .story-label>span { display:none; }
   .story-intro h2 { font-size:27px; line-height:1.65; margin-bottom:24px; }
+  .story-bridge { font-size:19px; margin-block:8px; }
+  .wish-quote { font-size:clamp(21px,6.1vw,27px); letter-spacing:-.6px; }
   .story-intro p:not(.eyebrow) { font-size:18px; line-height:1.95; }
   .memories-section { padding:40px 0 32px; }
   .memories-section .section-heading { margin:0 0 26px; gap:18px; }
@@ -181,6 +198,9 @@ body.memory-open { overflow:hidden; }
   .participate-note p { font-size:16px; }
   .account-copy { font-size:16px; }
   .faq-section { display:block; }
+  .faq-section>div:first-child { position:relative; padding-right:64px; padding-bottom:4px; }
+  .faq-xiaogu { position:absolute; right:0; bottom:22px; width:58px; height:58px; margin:0; border-radius:14px; }
+  .account-actions { align-items:flex-start; }
   .faq-section h2 { font-size:28px; margin-bottom:24px; }
   .faq-section .eyebrow { font-size:13px; letter-spacing:1px; }
   .faq-list summary { font-size:18px; line-height:1.8; padding-block:21px; gap:16px; }

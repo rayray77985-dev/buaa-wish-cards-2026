@@ -5,7 +5,7 @@
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
   // Use a release-specific address so a newly shared link avoids stale page caches.
   shareUrl.search = '';
-  shareUrl.searchParams.set('v', '20261105-stories');
+  shareUrl.searchParams.set('v', '20261105-xiaogu');
   const canonical = shareUrl.href;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;
@@ -53,18 +53,19 @@
     renderSlide(s);
   });
   function changeSlide(s, index) { const state = states[s]; state.index = (index + schools[s].cards.length) % schools[s].cards.length; state.elapsed = 0; renderSlide(s); }
-  let schoolFilter = 'all';
+  let schoolFilter = schools[0].key;
+  function selectSchool(key) {
+    schoolFilter = key;
+    document.querySelectorAll('[data-school]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.school === key)));
+    states.forEach((state, i) => { state.el.hidden = schools[i].key !== key; });
+    $('schools').classList.add('single-school');
+  }
   document.querySelectorAll('[data-school]').forEach(button => {
-    button.onclick = () => {
-      schoolFilter = button.dataset.school;
-      document.querySelectorAll('[data-school]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-      states.forEach((state, i) => { state.el.hidden = schoolFilter !== 'all' && schools[i].key !== schoolFilter; });
-      $('schools').classList.toggle('single-school', schoolFilter !== 'all');
-    };
+    button.onclick = () => selectSchool(button.dataset.school);
   });
+  selectSchool(schoolFilter);
   $('random-wish').onclick = () => {
-    const candidates = schools.map((school, i) => i).filter(i => schoolFilter === 'all' || schools[i].key === schoolFilter);
-    const s = candidates[Math.floor(Math.random() * candidates.length)];
+    const s = schools.findIndex(school => school.key === schoolFilter);
     openCard(s, Math.floor(Math.random() * schools[s].cards.length));
   };
   document.querySelector('.account-copy').onclick = () => copy('北航蓝天志愿者协会', '公众号名称已复制，可前往微信搜索');
@@ -96,6 +97,7 @@
   function setCardHash() { history.replaceState(null, '', `#${currentCard().id}`); }
   function openCard(s, index, fromHash = false) {
     if (overlay && overlay !== viewer) closeOverlay();
+    selectSchool(schools[s].key);
     activeSchool = s; activeIndex = index;
     if (viewer.hidden) { openOverlay(viewer); if (!fromHash) { ownHash = true; history.pushState(null, '', `#${currentCard().id}`); } }
     renderViewer(); $('viewer-close').focus({ preventScroll: true });
