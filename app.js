@@ -30,7 +30,7 @@
 
   schools.forEach((school, s) => {
     const el = document.createElement('article'); el.className = 'school'; el.setAttribute('aria-labelledby', `school-${school.key}`);
-    el.innerHTML = `<div class="school-header"><div><p class="school-location">宁夏 · 心愿来信</p><h3 class="school-title" id="school-${school.key}">${school.name}</h3></div><span class="school-total">${school.cards.length} 份心愿</span></div><button class="feature-card" type="button"><div class="feature-image-wrap"><img class="feature-image" alt=""><span class="enlarge-hint" aria-hidden="true">⤢ 放大看看</span></div><div class="feature-caption"><span class="card-id"></span><span>亲手写下的期待</span></div></button><div class="feature-controls"><span class="slide-count"></span><div class="slide-nav"><div class="progress-track" aria-hidden="true"><div class="progress-fill"></div></div><button class="round previous" type="button" aria-label="${school.name}上一张">‹</button><button class="round next" type="button" aria-label="${school.name}下一张">›</button></div></div><div class="thumbs" aria-label="${school.name}缩略图"></div><button class="browse-toggle" type="button" aria-expanded="false" aria-controls="all-${school.key}">浏览全部 ${school.cards.length} 张 <span aria-hidden="true">↓</span></button><div class="mini-gallery" id="all-${school.key}" hidden></div>`;
+    el.innerHTML = `<div class="school-header"><div><p class="school-location">宁夏 · 心愿来信</p><h3 class="school-title" id="school-${school.key}">${school.name}</h3></div><span class="school-total">${school.cards.length} 份心愿</span></div><button class="feature-card" type="button"><div class="feature-image-wrap"><img class="feature-image" alt=""><span class="enlarge-hint" aria-hidden="true">⤢ 放大看看</span></div><div class="feature-caption"><span>亲手写下的期待</span></div></button><div class="feature-controls"><span class="slide-count"></span><div class="slide-nav"><div class="progress-track" aria-hidden="true"><div class="progress-fill"></div></div><button class="round previous" type="button" aria-label="${school.name}上一张">‹</button><button class="round next" type="button" aria-label="${school.name}下一张">›</button></div></div><div class="thumbs" aria-label="${school.name}缩略图"></div><button class="browse-toggle" type="button" aria-expanded="false" aria-controls="all-${school.key}">浏览全部 ${school.cards.length} 张 <span aria-hidden="true">↓</span></button><div class="mini-gallery" id="all-${school.key}" hidden></div>`;
     $('schools').append(el); states[s].el = el;
     el.querySelector('.feature-card').onclick = () => openCard(s, states[s].index);
     el.querySelector('.previous').onclick = () => changeSlide(s, states[s].index - 1);
@@ -42,8 +42,8 @@
       const expand = browse.getAttribute('aria-expanded') !== 'true'; browse.setAttribute('aria-expanded', String(expand)); gallery.hidden = !expand;
       browse.innerHTML = expand ? '收起全部心愿 <span aria-hidden="true">↑</span>' : `浏览全部 ${school.cards.length} 张 <span aria-hidden="true">↓</span>`;
       if (expand && !gallery.children.length) school.cards.forEach((card, i) => {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'mini-card'; button.setAttribute('aria-label', `放大${school.name}心愿卡 ${card.id}`);
-        button.innerHTML = `<img src="${card.thumb}" alt="" loading="lazy" decoding="async" width="150" height="200"><span>${card.id}</span>`;
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'mini-card'; button.setAttribute('aria-label', `放大${school.name}心愿卡`);
+        button.innerHTML = `<img src="${card.thumb}" alt="" loading="lazy" decoding="async" width="150" height="200">`;
         button.onclick = () => openCard(s, i); gallery.append(button);
       });
     };
@@ -54,15 +54,14 @@
     const state = states[s], school = schools[s], card = school.cards[state.index], el = state.el, img = el.querySelector('.feature-image');
     const version = ++state.version;
     img.classList.add('is-loading');
-    const preload = new Image(); preload.onload = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = `${school.name}心愿卡 ${card.id}`; img.classList.remove('is-loading'); };
+    const preload = new Image(); preload.onload = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = `${school.name}心愿卡`; img.classList.remove('is-loading'); };
     preload.onerror = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = '图片暂未加载，请点击重试查看'; img.classList.remove('is-loading'); }; preload.src = card.thumb;
-    el.querySelector('.feature-card').setAttribute('aria-label', `放大${school.name}心愿卡 ${card.id}`);
-    el.querySelector('.card-id').textContent = card.id;
-    el.querySelector('.slide-count').innerHTML = `<strong>${String(state.index + 1).padStart(2, '0')}</strong> / ${school.cards.length}`;
+    el.querySelector('.feature-card').setAttribute('aria-label', `放大${school.name}心愿卡`);
+    el.querySelector('.slide-count').textContent = '心愿轮播';
     const thumbs = el.querySelector('.thumbs'), first = Math.floor(state.index / 6) * 6;
     if (thumbs.dataset.first !== String(first)) {
       thumbs.dataset.first = String(first); thumbs.replaceChildren();
-      school.cards.slice(first, first + 6).forEach((c, i) => { const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'thumb'; btn.setAttribute('aria-label', `预览${school.name}心愿卡 ${c.id}`); btn.innerHTML = `<img src="${c.thumb}" alt="" loading="lazy" decoding="async" width="70" height="70">`; btn.onclick = () => changeSlide(s, first + i); thumbs.append(btn); });
+      school.cards.slice(first, first + 6).forEach((c, i) => { const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'thumb'; btn.setAttribute('aria-label', `预览${school.name}心愿卡`); btn.innerHTML = `<img src="${c.thumb}" alt="" loading="lazy" decoding="async" width="70" height="70">`; btn.onclick = () => changeSlide(s, first + i); thumbs.append(btn); });
     }
     [...thumbs.children].forEach((btn, i) => { const active = first + i === state.index; btn.classList.toggle('is-active', active); btn.setAttribute('aria-pressed', String(active)); });
     const next = new Image(); next.src = school.cards[(state.index + 1) % school.cards.length].thumb;
@@ -85,9 +84,9 @@
   }
   function renderViewer() {
     zoom = 1; rotation = 0; points.clear(); const card = currentCard();
-    $('viewer-title').textContent = `${schools[activeSchool].name} · ${card.id}`;
-    $('viewer-counter').textContent = `第 ${activeIndex + 1} / ${schools[activeSchool].cards.length} 张心愿卡`;
-    picture.alt = `${schools[activeSchool].name}手写心愿卡 ${card.id}`; picture.style.opacity = '.25';
+    $('viewer-title').textContent = `${schools[activeSchool].name} · 手写心愿`;
+    $('viewer-counter').textContent = '亲手制作的心愿卡';
+    picture.alt = `${schools[activeSchool].name}手写心愿卡`; picture.style.opacity = '.25';
     $('image-status').textContent = '正在展开这份心愿…';
     picture.onload = () => { picture.style.opacity = '1'; $('image-status').textContent = ''; fitImage(true); };
     picture.onerror = () => { picture.style.opacity = '0'; $('image-status').textContent = '图片暂未加载成功，请点击此处重试。'; $('image-status').style.pointerEvents = 'auto'; };
@@ -114,7 +113,6 @@
   $('viewer-close').onclick = closeViewer; $('viewer-prev').onclick = () => moveCard(-1); $('viewer-next').onclick = () => moveCard(1);
   $('zoom-out').onclick = () => setZoom(zoom - .5); $('zoom-in').onclick = () => setZoom(zoom + .5); $('zoom-reset').onclick = () => setZoom(1);
   $('rotate').onclick = () => { rotation = (rotation + 90) % 360; fitImage(true); };
-  $('copy-card').onclick = () => copy(`${schools[activeSchool].name} · ${currentCard().id}`, '学校与心愿编号已复制');
   window.addEventListener('resize', () => fitImage(true));
   stage.addEventListener('dblclick', () => setZoom(zoom > 1 ? 1 : 2));
   stage.addEventListener('wheel', event => { if (event.ctrlKey) { event.preventDefault(); setZoom(zoom - event.deltaY * .01); } }, { passive: false });
