@@ -107,6 +107,7 @@ footer { font-size: 12px; line-height: 1.8; color: #536b78; gap: 20px; }
 @media (min-width:701px) and (max-width:1000px) {
   .hero h1 { font-size: 42px; }
   .hero { gap: 10px; }
+  .hero-art { width: 480px; margin-left: calc(100% - 480px); transform: scale(.72); transform-origin: right center; }
   .intro { font-size: 16px; }
   .school { padding: 20px; }
   .school-header { gap: 8px; }
