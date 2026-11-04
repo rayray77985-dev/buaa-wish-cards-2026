@@ -13,11 +13,11 @@ body { font-size: 16px; line-height: 1.6; background: #faf9f6; }
   background: rgba(250,249,246,.93);
   box-shadow: 0 4px 24px #203c4e04;
 }
-.brand-university { font-size: 13px; }
+.brand-university { font-size: 15px; }
 .brand-name { font-size: 18px; }
-nav { font-size: 15px; gap: 28px; }
+nav { font-size: 16px; gap: 28px; }
 nav > a { padding-block: 12px; }
-.pill { font-size: 14px; min-height: 44px; padding: 10px 20px; background: #e9f0f3; }
+.pill { font-size: 16px; min-height: 44px; padding: 10px 20px; background: #e9f0f3; }
 .primary {
   font-size: 16px; min-height: 54px; padding: 16px 26px;
   background: #244e68; box-shadow: 0 5px 12px #244e6814, inset 0 1px 0 #ffffff18;
@@ -27,23 +27,23 @@ nav > a { padding-block: 12px; }
 .primary:hover span { transform: translate(2px,2px); }
 button:active:not(:disabled), .primary:active { transform: translateY(1px); }
 .hero { padding-block: 82px 88px; gap: 26px; }
-.hero .eyebrow { font-size: 14px; letter-spacing: 1.5px; }
+.hero .eyebrow { font-size: 16px; letter-spacing: 1.5px; }
 .hero h1 { font-size: clamp(42px,4.6vw,61px); line-height: 1.35; }
 .intro { font-size: 18px; line-height: 1.95; margin: 30px 0; }
-.hero-note { font-size: 14px; color: var(--muted); }
+.hero-note { font-size: 16px; color: var(--muted); }
 .live-dot { width: 7px; height: 7px; box-shadow: 0 0 0 4px #79a99c15; margin-right: 3px; }
 .orbit { border-color: #b7d0dc; }
 .orbit:after { background: radial-gradient(circle at 35% 30%,#e6f2f6,#eaf0ee 72%); }
 .postcard { border: 1px solid #fff; box-shadow: 0 3px 6px #244e6808, 0 18px 40px #244e6817; }
-.postcard span:not(.tape) { font-size: 11px; color: #526a78; letter-spacing: 0; }
-.mascot-bubble { font-size: 14px; box-shadow: 0 5px 16px #244e6809; }
-.art-caption { font-size: 10px; color: #536f7d; }
+.postcard span:not(.tape) { font-size: 16px; line-height: 1.5; padding-block: 8px; color: #526a78; letter-spacing: 0; }
+.mascot-bubble { font-size: 16px; box-shadow: 0 5px 16px #244e6809; }
+.art-caption { font-size: 14px; letter-spacing: 1px; color: #536f7d; }
 .wish-section { padding-top: 42px; }
 .section-heading { margin: 20px 0 32px; }
-.section-heading .eyebrow, .about-copy .eyebrow { font-size: 12px; letter-spacing: 2px; }
+.section-heading .eyebrow, .about-copy .eyebrow { font-size: 14px; letter-spacing: 2px; }
 .section-heading h2 { font-size: 32px; line-height: 1.5; letter-spacing: -.5px; }
 .section-sub { font-size: 16px; line-height: 1.85; }
-.play-toggle { font-size: 14px; min-height: 46px; padding: 10px 18px; box-shadow: 0 2px 5px #203c4e04; }
+.play-toggle { font-size: 16px; min-height: 46px; padding: 10px 18px; box-shadow: 0 2px 5px #203c4e04; }
 #play-icon { font-size: 16px; }
 .school-columns { gap: 28px; }
 .school {
@@ -57,16 +57,16 @@ button:active:not(:disabled), .primary:active { transform: translateY(1px); }
   background: linear-gradient(155deg,#f8f5ec,#f1ecdf); border-color: #e9e2d1;
 }
 .school-header { margin-bottom: 22px; gap: 12px; }
-.school-location { font-size: 12px; letter-spacing: 1px; margin-bottom: 5px; }
+.school-location { font-size: 14px; letter-spacing: 1px; margin-bottom: 5px; }
 .school-title { font-size: 26px; letter-spacing: .5px; line-height: 1.5; }
-.school-total { font-size: 13px; padding: 7px 12px; white-space: nowrap; }
+.school-total { font-size: 15px; padding: 7px 12px; white-space: nowrap; }
 .feature-card { border-radius: 16px; padding: 12px 12px 0; box-shadow: 0 2px 3px #203c4e05, 0 10px 24px #203c4e0b; }
 .feature-image-wrap { height: 385px; border-radius: 8px; background: #f4f3ee; }
-.enlarge-hint { font-size: 13px; padding: 8px 12px; background: #fffffff2; border: 1px solid #203c4e0d; }
-.feature-caption, .feature-caption > span:last-child { font-size: 13px; color: #526a78; }
+.enlarge-hint { font-size: 15px; padding: 8px 12px; background: #fffffff2; border: 1px solid #203c4e0d; }
+.feature-caption, .feature-caption > span:last-child { font-size: 15px; color: #526a78; }
 .feature-caption { height: 48px; }
 .feature-controls { margin: 18px 0; }
-.slide-count { font-size: 13px; color: #526a78; }
+.slide-count { font-size: 15px; color: #526a78; }
 .round { width: 44px; height: 44px; font-size: 28px; flex-shrink: 0; }
 .slide-nav { gap: 10px; }
 .progress-track { width: 56px; height: 3px; border-radius: 4px; }
@@ -74,41 +74,41 @@ button:active:not(:disabled), .primary:active { transform: translateY(1px); }
 .thumb { border-radius: 9px; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
 .thumb.is-active { box-shadow: 0 0 0 2px var(--school-accent),0 4px 10px #203c4e15; }
 .browse-toggle {
-  font-size: 15px; min-height: 48px; padding: 11px 8px; margin-top: 20px;
+  font-size: 16px; min-height: 48px; padding: 11px 8px; margin-top: 20px;
   border-radius: 14px; background: #ffffff85; border: 1px solid #ffffffa8;
   transition: background .2s, box-shadow .2s;
 }
 .browse-toggle:hover { background: #fff; box-shadow: 0 4px 12px #203c4e07; }
 .mini-card { border-radius: 9px; padding: 5px; box-shadow: 0 3px 8px #203c4e06; }
-.gallery-tip { font-size: 14px; color: var(--muted); letter-spacing: .4px; margin-top: 28px; line-height: 1.8; }
+.gallery-tip { font-size: 16px; color: var(--muted); letter-spacing: .4px; margin-top: 28px; line-height: 1.8; }
 .about-section { margin-top: 96px; padding-block: 64px; gap: 64px; }
 .about-copy h2 { font-size: 34px; line-height: 1.5; }
 .about-copy > p:not(.eyebrow) { font-size: 17px; line-height: 1.95; margin-bottom: 24px; }
-.about-sticker { font-size: 15px; color: #756029; border-radius: 3px; }
+.about-sticker { font-size: 16px; color: #756029; border-radius: 3px; }
 .claim-note { background: #edf3f3; padding: 20px 22px; border: 1px solid #dfe9e9; border-radius: 16px; }
-.text-link { font-size: 15px; min-height: 44px; align-items: center; }
+.text-link { font-size: 16px; min-height: 44px; align-items: center; }
 .closing { padding-block: 72px 76px; }
 .closing p { font-size: 24px; line-height: 1.8; }
-footer { font-size: 12px; line-height: 1.8; color: #536b78; gap: 20px; }
+footer { font-size: 14px; line-height: 1.8; color: #536b78; gap: 20px; }
 .viewer-top { height: 96px; }
 .viewer-top strong { font-size: 18px; }
-.viewer-top span { font-size: 13px; color: #bed0db; letter-spacing: .5px; }
+.viewer-top span { font-size: 15px; color: #bed0db; letter-spacing: .5px; }
 .image-status { font-size: 16px; width: min(85%,360px); }
 .viewer-tools button { min-width: 44px; height: 44px; }
-#zoom-reset { font-size: 14px; min-width: 64px; }
-.viewer-bottom p { font-size: 13px; line-height: 1.6; color: #bed0db; letter-spacing: 0; }
+#zoom-reset { font-size: 16px; min-width: 64px; }
+.viewer-bottom p { font-size: 15px; line-height: 1.6; color: #bed0db; letter-spacing: 0; }
 .share-card { padding: 40px 28px 28px; border: 1px solid #fff; }
-.share-card .eyebrow { font-size: 12px; }
+.share-card .eyebrow { font-size: 14px; }
 .share-card h2 { font-size: 28px; line-height: 1.5; text-wrap: balance; }
-.share-card p:not(.eyebrow) { font-size: 15px; line-height: 1.8; }
-.share-card .share-small { font-size: 13px!important; }
+.share-card p:not(.eyebrow) { font-size: 16px; line-height: 1.8; }
+.share-card .share-small { font-size: 15px!important; }
 .share-overlay { overflow-y: auto; }
-.toast { font-size: 15px; }
+.toast { font-size: 16px; }
 @media (min-width:701px) and (max-width:1000px) {
   .hero h1 { font-size: 42px; }
   .hero { gap: 10px; }
   .hero-art { width: 480px; margin-left: calc(100% - 480px); transform: scale(.72); transform-origin: right center; }
-  .intro { font-size: 16px; }
+  .intro { font-size: 18px; }
   .school { padding: 20px; }
   .school-header { gap: 8px; }
   .school-title { font-size: 23px; }
@@ -124,64 +124,64 @@ footer { font-size: 12px; line-height: 1.8; color: #536b78; gap: 20px; }
   .brand { gap: 8px; }
   .brand-mark { width: 43px; }
   .brand-text { gap: 4px; }
-  .brand-university { font-size: 12px; letter-spacing: .3px; }
+  .brand-university { font-size: 14px; letter-spacing: .3px; }
   .brand-name { font-size: 16px; letter-spacing: .5px; }
   nav > a { display: none; }
-  .pill { font-size: 14px; padding: 10px 14px; }
+  .pill { font-size: 16px; padding: 10px 14px; }
   .pill span { margin-left: 3px; }
   .hero { padding: 42px 6px 42px; }
-  .hero .eyebrow { font-size: 13px; letter-spacing: 1px; margin-bottom: 22px; }
+  .hero .eyebrow { font-size: 15px; letter-spacing: 1px; margin-bottom: 22px; }
   .hero h1 { font-size: clamp(34px,8.7vw,52px); line-height: 1.4; letter-spacing: -1.3px; }
-  .intro { font-size: 16px; line-height: 1.95; margin-block: 26px; }
+  .intro { font-size: 18px; line-height: 1.95; margin-block: 26px; }
   .mobile-br { display: block; }
   .hero .primary, .closing .primary { font-size: 16px; min-height: 54px; padding: 15px 24px; }
-  .hero-note { font-size: 13px; margin-top: 20px; letter-spacing: 0; }
+  .hero-note { font-size: 15px; margin-top: 20px; letter-spacing: 0; }
   .hero-art { margin-top: 38px; }
   .wish-section { padding-top: 28px; }
   .section-heading { flex-wrap: wrap; gap: 18px; margin: 12px 0 24px; }
   .section-heading > div { width: 100%; }
-  .section-heading .eyebrow { font-size: 11px; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .section-heading .eyebrow { font-size: 14px; letter-spacing: 1.5px; margin-bottom: 12px; }
   .section-heading h2 { font-size: 26px; line-height: 1.5; max-width: none; letter-spacing: -.6px; }
-  .section-sub { font-size: 15px; max-width: none; line-height: 1.8; }
-  .play-toggle { font-size: 14px; min-height: 44px; margin: 0; padding: 9px 16px; gap: 8px; }
+  .section-sub { font-size: 16px; max-width: none; line-height: 1.8; }
+  .play-toggle { font-size: 16px; min-height: 44px; margin: 0; padding: 9px 16px; gap: 8px; }
   .school-columns { gap: 12px; }
   .school { border-radius: 20px; padding: 18px 10px 12px; }
   .school-header { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 16px; }
-  .school-location { font-size: 12px; letter-spacing: 0; margin-bottom: 3px; }
+  .school-location { font-size: 14px; letter-spacing: 0; margin-bottom: 3px; }
   .school-title { font-size: 22px; letter-spacing: 0; }
-  .school-total { position: static; font-size: 12px; background: #ffffff85; padding: 3px 9px; }
+  .school-total { position: static; font-size: 14px; background: #ffffff85; padding: 3px 9px; }
   .feature-card { padding: 6px 6px 0; border-radius: 10px; }
   .feature-image-wrap { height: 225px; border-radius: 5px; }
-  .enlarge-hint { font-size: 12px; padding: 5px 8px; right: 4px; bottom: 5px; }
+  .enlarge-hint { font-size: 14px; padding: 5px 8px; right: 4px; bottom: 5px; }
   .feature-caption { height: 42px; }
-  .feature-caption > span:last-child { display: inline; font-size: 12px; letter-spacing: 0; }
+  .feature-caption > span:last-child { display: inline; font-size: 14px; letter-spacing: 0; }
   .feature-controls { justify-content: center; margin: 14px 0; }
   .slide-count { display: none; }
   .slide-nav { width: 100%; justify-content: space-between; gap: 6px; }
   .slide-nav .round { width: 44px; height: 44px; font-size: 27px; }
   .thumbs { grid-template-columns: repeat(2,1fr); gap: 8px; }
   .thumb { padding: 3px; border-radius: 7px; }
-  .browse-toggle { font-size: 14px; line-height: 1.6; gap: 5px; padding: 10px 4px; margin-top: 16px; border-radius: 11px; }
+  .browse-toggle { font-size: 16px; line-height: 1.6; gap: 5px; padding: 10px 4px; margin-top: 16px; border-radius: 11px; }
   .mini-gallery { gap: 10px 7px; }
-  .gallery-tip { font-size: 13px; letter-spacing: 0; margin-top: 22px; }
+  .gallery-tip { font-size: 15px; letter-spacing: 0; margin-top: 22px; }
   .about-section { margin-top: 64px; padding: 40px 6px; gap: 30px; }
   .about-illustration { min-height: 140px; }
-  .about-sticker { font-size: 14px; max-width: none; }
-  .about-copy .eyebrow { font-size: 11px; letter-spacing: 1.2px; }
+  .about-sticker { font-size: 16px; max-width: none; }
+  .about-copy .eyebrow { font-size: 14px; letter-spacing: 1.2px; }
   .about-copy h2 { font-size: 29px; line-height: 1.55; margin-bottom: 24px; }
-  .about-copy > p:not(.eyebrow) { font-size: 16px; line-height: 1.95; }
+  .about-copy > p:not(.eyebrow) { font-size: 18px; line-height: 1.95; }
   .claim-note { padding: 18px; }
-  .text-link { font-size: 15px; }
+  .text-link { font-size: 16px; }
   .closing { padding: 48px 0 52px; }
   .closing p { font-size: 22px; }
-  footer { font-size: 12px; gap: 8px 14px; padding: 26px 0; text-align: center; letter-spacing: 0; }
+  footer { font-size: 14px; gap: 8px 14px; padding: 26px 0; text-align: center; letter-spacing: 0; }
   .viewer-top { height: 88px; padding-inline: 16px; }
   .viewer-top strong { font-size: 16px; letter-spacing: 0; }
-  .viewer-top span { font-size: 12px; }
+  .viewer-top span { font-size: 14px; }
   .dark { width: 44px; height: 44px; }
   .viewer-prev, .viewer-next { width: 44px; height: 44px; top: auto; bottom: max(138px,calc(env(safe-area-inset-bottom) + 116px)); }
   .viewer-bottom { padding: 14px 12px max(18px,env(safe-area-inset-bottom)); }
-  .viewer-bottom p { font-size: 12px; }
+  .viewer-bottom p { font-size: 14px; }
   .viewer-tools button { height: 44px; min-width: 44px; }
   .share-card { padding: 42px 22px 24px; }
   .share-card h2 { font-size: 26px; }
@@ -190,17 +190,17 @@ footer { font-size: 12px; line-height: 1.8; color: #536b78; gap: 20px; }
   .nav { padding-inline: 12px; }
   .brand { gap: 6px; }
   .brand-mark { width: 35px; }
-  .brand-university { font-size: 11px; }
-  .brand-name { font-size: 15px; }
-  .pill { font-size: 13px; padding-inline: 10px; }
+  .brand-university { font-size: 14px; }
+  .brand-name { font-size: 16px; }
+  .pill { font-size: 15px; padding-inline: 10px; }
   .pill span { display: none; }
   .school-columns { gap: 8px; }
   .school { padding-inline: 8px; }
   .school-title { font-size: 21px; }
-  .school-location { font-size: 11px; }
+  .school-location { font-size: 14px; }
   .feature-image-wrap { height: 195px; }
-  .feature-caption > span:last-child { font-size: 11px; }
-  .browse-toggle { font-size: 13px; }
+  .feature-caption > span:last-child { font-size: 14px; }
+  .browse-toggle { font-size: 15px; }
   .section-heading h2 { font-size: 24px; }
   .hero h1 { font-size: 34px; }
 }
