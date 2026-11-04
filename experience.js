@@ -50,5 +50,29 @@
   }
   window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updatePosition);}},{passive:true});
   window.addEventListener('resize',updatePosition); updatePosition();
-  if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){if(!reduce.matches)e.target.classList.add('chapter-entered');observer.unobserve(e.target);}});},{threshold:.12});document.querySelectorAll('.story-intro,.participate-heading,.journey li,.faq-section').forEach(el=>observer.observe(el));}
+  // Reveal each reading beat once; keep content readable without JS or motion support.
+  if ('IntersectionObserver' in window && !reduce.matches) {
+    const targets = [...document.querySelectorAll('.letter-ribbon, .section-heading .eyebrow, .section-heading h2, .section-heading .section-sub, .story-label, .story-intro h2 > span, .story-intro p:not(.eyebrow), .memory-card figcaption, .participate-heading .eyebrow, .participate-heading h2, .participate-heading .section-sub, .journey li, .participate-note, .faq-section > div:first-child, .faq-list details, .closing > p, .closing > .primary, .history-links')];
+    const groups = new Map();
+    const reveal = el => { el.classList.remove('reveal-wait'); observer.unobserve(el); };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) reveal(entry.target); });
+    }, { threshold: 0, rootMargin: '0px 0px -36px 0px' });
+    targets.forEach(el => {
+      // Never hide content already on screen, including restored scroll positions.
+      if (el.getBoundingClientRect().top < innerHeight) return;
+      const order = groups.get(el.parentElement) || 0;
+      groups.set(el.parentElement, order + 1);
+      el.style.setProperty('--reveal-delay', `${Math.min(order, 3) * 65}ms`);
+      el.classList.add('scroll-reveal', 'reveal-wait');
+      observer.observe(el);
+    });
+    document.addEventListener('focusin', event => {
+      const el = event.target.closest('.reveal-wait');
+      if (el) { el.style.setProperty('--reveal-delay', '0ms'); reveal(el); }
+    });
+    reduce.addEventListener?.('change', event => {
+      if (event.matches) { targets.forEach(reveal); observer.disconnect(); }
+    });
+  }
 })();
