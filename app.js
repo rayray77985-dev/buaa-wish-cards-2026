@@ -5,7 +5,7 @@
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
   // Use a release-specific address so a newly shared link avoids stale page caches.
   shareUrl.search = '';
-  shareUrl.searchParams.set('v', '20261104-readable3');
+  shareUrl.searchParams.set('v', '20261105-stories');
   const canonical = shareUrl.href;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;
@@ -23,7 +23,7 @@
     }
     if (ok) toast(message); else window.prompt('请长按或选择并复制：', text);
   }
-  function setBackgroundInert(value) { document.querySelectorAll('body > header, body > main, body > footer, body > .skip').forEach(el => { el.inert = value; }); }
+  function setBackgroundInert(value) { document.querySelectorAll('body > header, body > main, body > footer, body > .skip, body > .mobile-dock').forEach(el => { el.inert = value || (el.classList.contains('mobile-dock') && !el.classList.contains('is-visible')); }); }
   function openOverlay(el) { returnFocus = document.activeElement; overlay = el; el.hidden = false; document.body.classList.add('overlay-open'); setBackgroundInert(true); }
   function closeOverlay() { if (!overlay) return; overlay.hidden = true; overlay = null; document.body.classList.remove('overlay-open'); setBackgroundInert(false); returnFocus?.focus({ preventScroll: true }); }
   function updatePlay() { $('autoplay').setAttribute('aria-pressed', String(playing)); $('play-icon').textContent = playing ? 'Ⅱ' : '▷'; $('play-label').textContent = playing ? '暂停轮播' : '开启轮播'; }
@@ -53,6 +53,21 @@
     renderSlide(s);
   });
   function changeSlide(s, index) { const state = states[s]; state.index = (index + schools[s].cards.length) % schools[s].cards.length; state.elapsed = 0; renderSlide(s); }
+  let schoolFilter = 'all';
+  document.querySelectorAll('[data-school]').forEach(button => {
+    button.onclick = () => {
+      schoolFilter = button.dataset.school;
+      document.querySelectorAll('[data-school]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+      states.forEach((state, i) => { state.el.hidden = schoolFilter !== 'all' && schools[i].key !== schoolFilter; });
+      $('schools').classList.toggle('single-school', schoolFilter !== 'all');
+    };
+  });
+  $('random-wish').onclick = () => {
+    const candidates = schools.map((school, i) => i).filter(i => schoolFilter === 'all' || schools[i].key === schoolFilter);
+    const s = candidates[Math.floor(Math.random() * candidates.length)];
+    openCard(s, Math.floor(Math.random() * schools[s].cards.length));
+  };
+  document.querySelector('.account-copy').onclick = () => copy('北航蓝天志愿者协会', '公众号名称已复制，可前往微信搜索');
   function renderSlide(s) {
     const state = states[s], school = schools[s], card = school.cards[state.index], el = state.el, img = el.querySelector('.feature-image');
     const version = ++state.version;
@@ -74,7 +89,7 @@
   setInterval(() => {
     const now = performance.now(), delta = Math.min(now - lastTick, 400); lastTick = now;
     if (!playing || !visible || document.hidden || overlay) return;
-    states.forEach((state, s) => { if (state.hover || state.focus) return; state.elapsed += delta; if (state.elapsed >= 6000) changeSlide(s, state.index + 1); state.el.querySelector('.progress-fill').style.width = `${state.elapsed / 60}%`; });
+    states.forEach((state, s) => { if (state.el.hidden || state.hover || state.focus) return; state.elapsed += delta; if (state.elapsed >= 6000) changeSlide(s, state.index + 1); state.el.querySelector('.progress-fill').style.width = `${state.elapsed / 60}%`; });
   }, 100);
 
   function currentCard() { return schools[activeSchool].cards[activeIndex]; }
