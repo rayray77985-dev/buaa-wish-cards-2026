@@ -43,21 +43,23 @@
     const y=window.scrollY,total=document.documentElement.scrollHeight-innerHeight;
     progress.style.transform=`scaleX(${total>0?Math.min(1,y/total):0})`;
     const show=document.querySelector('.hero').getBoundingClientRect().bottom<100;
-    dock.classList.toggle('is-visible',show); dock.inert=!show;
+    dock.classList.toggle('is-visible',show); dock.inert=!show||document.body.classList.contains('overlay-open')||document.body.classList.contains('memory-open');
+    document.querySelector('.letter-mascot').style.animationPlayState = document.hidden || document.querySelector('.hero').getBoundingClientRect().bottom < 0 ? 'paused' : 'running';
     let active='wishes'; for(const section of sections)if(section.getBoundingClientRect().top<innerHeight*.45)active=section.id;
     dock.querySelectorAll('a').forEach(a=>{if(a.dataset.section===active)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
     ticking=false;
   }
   window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updatePosition);}},{passive:true});
   window.addEventListener('resize',updatePosition); updatePosition();
+  document.addEventListener('visibilitychange',updatePosition);
   // Reveal each reading beat once; keep content readable without JS or motion support.
   if ('IntersectionObserver' in window && !reduce.matches) {
-    const targets = [...document.querySelectorAll('.letter-ribbon, .section-heading .eyebrow, .section-heading h2, .section-heading .section-sub, .story-label, .story-intro h2 > span, .story-intro p:not(.eyebrow), .memory-card figcaption, .participate-heading .eyebrow, .participate-heading h2, .participate-heading .section-sub, .journey li, .participate-note, .faq-section > div:first-child, .faq-list details, .closing > p, .closing > .primary, .history-links')];
+    const targets = [...document.querySelectorAll('.letter-ribbon, .section-heading .eyebrow, .section-heading h2, .section-heading .section-sub, .claim-guide, .story-label, .story-intro h2 > span, .story-intro p:not(.eyebrow), .memory-card figcaption, .participate-heading .eyebrow, .participate-heading h2, .participate-heading .section-sub, .journey li, .participate-note, .faq-section > div:first-child, .faq-list details, .closing > p, .closing > .primary, .history-links')];
     const groups = new Map();
     const reveal = el => { el.classList.remove('reveal-wait'); observer.unobserve(el); };
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) reveal(entry.target); });
-    }, { threshold: 0, rootMargin: '0px 0px -36px 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px -12px 0px' });
     targets.forEach(el => {
       // Never hide content already on screen, including restored scroll positions.
       if (el.getBoundingClientRect().top < innerHeight) return;

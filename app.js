@@ -5,7 +5,7 @@
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
   // Use a release-specific address so a newly shared link avoids stale page caches.
   shareUrl.search = '';
-  shareUrl.searchParams.set('v', '20261105-reveal');
+  shareUrl.searchParams.set('v', '20261105-refined');
   const canonical = shareUrl.href;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;
@@ -55,10 +55,18 @@
   function changeSlide(s, index) { const state = states[s]; state.index = (index + schools[s].cards.length) % schools[s].cards.length; state.elapsed = 0; renderSlide(s); }
   let schoolFilter = schools[0].key;
   function selectSchool(key) {
+    const changed = schoolFilter !== key;
     schoolFilter = key;
+    document.querySelector('.school-switch').dataset.selected = key;
     document.querySelectorAll('[data-school]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.school === key)));
     states.forEach((state, i) => { state.el.hidden = schools[i].key !== key; });
     $('schools').classList.add('single-school');
+    const selected = states.find((state, i) => schools[i].key === key);
+    if (changed && !reduced.matches && selected.el.animate) {
+      selected.el.getAnimations().forEach(animation => animation.cancel());
+      selected.el.animate([{opacity:.45,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],
+        {duration:320,easing:'cubic-bezier(.22,1,.36,1)'});
+    }
   }
   document.querySelectorAll('[data-school]').forEach(button => {
     button.onclick = () => selectSchool(button.dataset.school);
@@ -73,7 +81,15 @@
     const state = states[s], school = schools[s], card = school.cards[state.index], el = state.el, img = el.querySelector('.feature-image');
     const version = ++state.version;
     img.classList.add('is-loading');
-    const preload = new Image(); preload.onload = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = `${school.name}心愿卡`; img.classList.remove('is-loading'); };
+    const preload = new Image(); preload.onload = async () => {
+      try { await preload.decode(); } catch (_) {}
+      if (version !== state.version) return;
+      img.src = card.thumb; img.alt = `${school.name}心愿卡`; img.classList.remove('is-loading');
+      if (!reduced.matches && img.animate && !el.hidden) {
+        img.getAnimations().forEach(animation => animation.cancel());
+        img.animate([{opacity:.5},{opacity:1}],{duration:360,easing:'ease-out'});
+      }
+    };
     preload.onerror = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = '图片暂未加载，请点击重试查看'; img.classList.remove('is-loading'); }; preload.src = card.thumb;
     el.querySelector('.feature-card').setAttribute('aria-label', `放大${school.name}心愿卡`);
     el.querySelector('.slide-count').textContent = '心愿轮播';
@@ -89,8 +105,8 @@
   let lastTick = performance.now();
   setInterval(() => {
     const now = performance.now(), delta = Math.min(now - lastTick, 400); lastTick = now;
-    if (!playing || !visible || document.hidden || overlay) return;
-    states.forEach((state, s) => { if (state.el.hidden || state.hover || state.focus) return; state.elapsed += delta; if (state.elapsed >= 6000) changeSlide(s, state.index + 1); state.el.querySelector('.progress-fill').style.width = `${state.elapsed / 60}%`; });
+    if (!playing || !visible || document.hidden || overlay || document.body.classList.contains('memory-open')) return;
+    states.forEach((state, s) => { if (state.el.hidden || state.hover || state.focus) return; state.elapsed += delta; if (state.elapsed >= 6000) changeSlide(s, state.index + 1); state.el.querySelector('.progress-fill').style.transform = `scaleX(${state.elapsed / 6000})`; });
   }, 100);
 
   function currentCard() { return schools[activeSchool].cards[activeIndex]; }
