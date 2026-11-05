@@ -5,7 +5,7 @@
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
   // Use a release-specific address so a newly shared link avoids stale page caches.
   shareUrl.search = '';
-  shareUrl.searchParams.set('v', '20261105-refined');
+  shareUrl.searchParams.set('v', '20261105-unified');
   const canonical = shareUrl.href;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;

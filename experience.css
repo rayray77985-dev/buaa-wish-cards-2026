@@ -265,9 +265,6 @@ body.memory-open { overflow:hidden; }
 .claim-guide-bottom .article-link { flex-shrink:0; font-weight:600; }
 .journey { gap:16px; }
 .journey li { padding:24px 20px; border:1px solid #e0e7e8; border-radius:20px; background:#ffffff70; box-shadow:0 4px 16px #244e6803; }
-.journey li.journey-key { background:linear-gradient(145deg,#e9f3f8,#f2f7f6); border-color:#b8d3df; box-shadow:0 6px 24px #244e6808; }
-.journey-key .step-icon { color:#fff; background:#2b5c77; box-shadow:0 5px 12px #244e6815; }
-.journey-key .step-kicker { color:#245675; font-weight:650; }
 .journey p { font-size:17px; }
 .journey strong,.faq-list strong { color:#254e66; font-weight:700; }
 .journey strong { text-decoration:underline; text-decoration-color:#b8d6e3; text-decoration-thickness:3px; text-underline-offset:4px; }
