@@ -327,6 +327,60 @@ body.memory-open { overflow:hidden; }
   .journey li { padding-left:72px; padding-right:15px; }
   .journey .step-icon { left:15px; width:40px; height:40px; }
 }
+/* Official questionnaire labels stay with their photograph at every size. */
+.feature-caption { display:block; height:auto; min-height:100px; padding:18px 4px 20px; }
+.feature-card:disabled { opacity:1; cursor:progress; }
+.wish-identity { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; line-height:1.7; }
+.wish-identity strong { color:#254e66; font-size:20px; font-weight:650; }
+.wish-number { display:inline-flex; flex-shrink:0; align-items:center; padding:3px 10px; background:#e8f1f5; border:1px solid #d7e5eb; border-radius:9px; color:#245675; font-size:16px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.3px; }
+.wish-grade { font-size:17px; color:#526a78; }
+.feature-caption>.wish-description,.mini-caption>.wish-description { display:block; margin-top:12px; font-size:18px; color:#344f60; line-height:1.85; letter-spacing:0; overflow-wrap:anywhere; }
+.wish-field-label { display:inline; margin-right:10px; color:#69808b; font-size:16px; }
+.thumb-number { position:absolute; left:6px; bottom:6px; padding:2px 7px; border-radius:7px; background:#ffffffeb; color:#254e66; font-size:14px; font-weight:650; font-variant-numeric:tabular-nums; box-shadow:0 1px 5px #203c4e12; }
+.single-school .mini-gallery { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:start; }
+.mini-card { text-align:left; padding:8px; border:1px solid #ffffffb0; box-shadow:0 4px 14px #244e6808; }
+.mini-card>.mini-caption { display:block; padding:12px 5px 8px; }
+.mini-card .wish-identity { gap:6px 8px; }
+.mini-card .wish-identity strong { font-size:17px; }
+.mini-card .wish-number { font-size:14px; padding:2px 7px; line-height:1.7; }
+.mini-card .wish-grade { font-size:15px; line-height:1.7; }
+.mini-card .wish-description { font-size:16px; line-height:1.8; text-align:left; margin-top:8px; }
+.mini-card .wish-field-label { font-size:15px; }
+.viewer-top { height:auto; min-height:96px; gap:16px; }
+.viewer-top>div { min-width:0; }
+.viewer-top strong { font-size:20px; line-height:1.6; }
+.viewer-bottom { gap:12px; padding-top:14px; }
+.viewer-wish { display:flex; gap:12px; width:min(860px,100%); max-height:22vh; overflow-y:auto; padding:12px 16px; background:#ffffff0a; border:1px solid #ffffff15; border-radius:14px; overscroll-behavior:contain; }
+.viewer-wish>span { flex-shrink:0; color:#bad0db; font-size:16px; line-height:1.8; }
+.viewer-bottom .viewer-wish p { width:auto; margin:0; color:#f0f6f9; font-size:18px; line-height:1.8; text-align:left; }
+.viewer-claim-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.viewer-claim-actions a,.viewer-claim-actions button { display:flex; align-items:center; justify-content:center; padding:10px 16px; min-height:46px; border-radius:99px; font-size:16px; line-height:1.5; }
+#copy-number { background:#ffffff12; border:1px solid #ffffff22; color:#e0edf3; }
+#viewer-claim { background:#e5eff4; color:#254e66; font-weight:650; }
+.viewer .viewer-prev,.viewer .viewer-next { top:43%; bottom:auto; }
+@media(max-width:700px) {
+  .feature-caption { padding:16px 8px 18px; }
+  .feature-caption>.wish-description { display:block; font-size:18px; margin-top:12px; }
+  .wish-identity strong { font-size:19px; }
+  .wish-grade { font-size:16px; }
+  .single-school .mini-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .mini-card { padding:6px; }
+  .mini-card>.mini-caption { padding:10px 3px 6px; }
+  .mini-card .wish-identity { gap:6px 8px; }
+  .mini-card .wish-number { width:max-content; font-size:14px; }
+  .mini-card .wish-identity strong { font-size:17px; }
+  .mini-card .wish-grade { font-size:15px; }
+  .mini-card .wish-description { font-size:16px; }
+  .viewer-top { min-height:88px; padding-block:max(14px,env(safe-area-inset-top)) 14px; }
+  .viewer-top strong { font-size:18px; }
+  .viewer-bottom { gap:10px; padding-inline:12px; }
+  .viewer-wish { max-height:21vh; padding:10px 12px; gap:10px; }
+  .viewer-bottom .viewer-wish p { font-size:17px; line-height:1.75; }
+  .viewer-tools { flex-shrink:0; }
+  .viewer-claim-actions { width:100%; }
+  .viewer-claim-actions>a,.viewer-claim-actions>button { flex:1; min-width:0; padding-inline:10px; }
+  .viewer-bottom .viewer-gesture-help { font-size:13px; }
+}
 @media(prefers-reduced-motion:reduce) {
   .letter-mascot { animation:none!important; }
   .scroll-reveal.reveal-wait { opacity:1; transform:none; }

@@ -5,8 +5,14 @@
   const shareUrl = new URL(window.location.href); shareUrl.hash = '';
   // Use a release-specific address so a newly shared link avoids stale page caches.
   shareUrl.search = '';
-  shareUrl.searchParams.set('v', '20261105-unified');
+  shareUrl.searchParams.set('v', '20261106-labels2');
   const canonical = shareUrl.href;
+  const claimUrl = 'https://f.wps.cn/g/WClEm3ZR/';
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const cardDescription = (card, school) => `${school.name} · 问卷编号 ${card.number} · ${card.name} · ${card.grade} · 心愿：${card.wish}`;
+  function cardCaption(card) {
+    return `<span class="wish-identity"><span class="wish-number">问卷 ${escapeHTML(card.number)}</span><strong>${escapeHTML(card.name)}</strong><span class="wish-grade">${escapeHTML(card.grade)}</span></span><span class="wish-description"><span class="wish-field-label">心愿</span>${escapeHTML(card.wish)}</span>`;
+  }
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, overlay = null, returnFocus = null;
   let activeSchool = 0, activeIndex = 0, zoom = 1, rotation = 0, ownHash = false;
@@ -45,8 +51,8 @@
       const expand = browse.getAttribute('aria-expanded') !== 'true'; browse.setAttribute('aria-expanded', String(expand)); gallery.hidden = !expand;
       browse.innerHTML = expand ? '收起全部心愿 <span aria-hidden="true">↑</span>' : `浏览全部 ${school.cards.length} 张 <span aria-hidden="true">↓</span>`;
       if (expand && !gallery.children.length) school.cards.forEach((card, i) => {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'mini-card'; button.setAttribute('aria-label', `放大${school.name}心愿卡`);
-        button.innerHTML = `<img src="${card.thumb}" alt="" loading="lazy" decoding="async" width="150" height="200">`;
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'mini-card'; button.setAttribute('aria-label', `放大：${cardDescription(card, school)}`);
+        button.innerHTML = `<img src="${card.thumb}" alt="" loading="lazy" decoding="async" width="150" height="200"><span class="mini-caption">${cardCaption(card)}</span>`;
         button.onclick = () => openCard(s, i); gallery.append(button);
       });
     };
@@ -81,22 +87,29 @@
     const state = states[s], school = schools[s], card = school.cards[state.index], el = state.el, img = el.querySelector('.feature-image');
     const version = ++state.version;
     img.classList.add('is-loading');
+    const feature = el.querySelector('.feature-card');
+    feature.disabled = true;
+    function commitCaption() {
+      feature.setAttribute('aria-label', `放大：${cardDescription(card, school)}`);
+      el.querySelector('.feature-caption').innerHTML = cardCaption(card);
+      feature.disabled = false;
+    }
     const preload = new Image(); preload.onload = async () => {
       try { await preload.decode(); } catch (_) {}
       if (version !== state.version) return;
-      img.src = card.thumb; img.alt = `${school.name}心愿卡`; img.classList.remove('is-loading');
+      img.src = card.thumb; img.alt = cardDescription(card, school); img.classList.remove('is-loading');
+      commitCaption();
       if (!reduced.matches && img.animate && !el.hidden) {
         img.getAnimations().forEach(animation => animation.cancel());
         img.animate([{opacity:.5},{opacity:1}],{duration:360,easing:'ease-out'});
       }
     };
-    preload.onerror = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = '图片暂未加载，请点击重试查看'; img.classList.remove('is-loading'); }; preload.src = card.thumb;
-    el.querySelector('.feature-card').setAttribute('aria-label', `放大${school.name}心愿卡`);
+    preload.onerror = () => { if (version !== state.version) return; img.src = card.thumb; img.alt = '图片暂未加载，请点击重试查看'; img.classList.remove('is-loading'); commitCaption(); }; preload.src = card.thumb;
     el.querySelector('.slide-count').textContent = '心愿轮播';
     const thumbs = el.querySelector('.thumbs'), first = Math.floor(state.index / 6) * 6;
     if (thumbs.dataset.first !== String(first)) {
       thumbs.dataset.first = String(first); thumbs.replaceChildren();
-      school.cards.slice(first, first + 6).forEach((c, i) => { const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'thumb'; btn.setAttribute('aria-label', `预览${school.name}心愿卡`); btn.innerHTML = `<img src="${c.thumb}" alt="" loading="lazy" decoding="async" width="70" height="70">`; btn.onclick = () => changeSlide(s, first + i); thumbs.append(btn); });
+      school.cards.slice(first, first + 6).forEach((c, i) => { const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'thumb'; btn.setAttribute('aria-label', `预览：${cardDescription(c, school)}`); btn.innerHTML = `<img src="${c.thumb}" alt="" loading="lazy" decoding="async" width="70" height="70"><span class="thumb-number" aria-hidden="true">${escapeHTML(c.number)}</span>`; btn.onclick = () => changeSlide(s, first + i); thumbs.append(btn); });
     }
     [...thumbs.children].forEach((btn, i) => { const active = first + i === state.index; btn.classList.toggle('is-active', active); btn.setAttribute('aria-pressed', String(active)); });
     const next = new Image(); next.src = school.cards[(state.index + 1) % school.cards.length].thumb;
@@ -120,9 +133,11 @@
   }
   function renderViewer() {
     zoom = 1; rotation = 0; points.clear(); const card = currentCard();
-    $('viewer-title').textContent = `${schools[activeSchool].name} · 手写心愿`;
-    $('viewer-counter').textContent = '亲手制作的心愿卡';
-    picture.alt = `${schools[activeSchool].name}手写心愿卡`; picture.style.opacity = '.25';
+    $('viewer-title').textContent = `问卷 ${card.number} · ${card.name} · ${card.grade}`;
+    $('viewer-counter').textContent = `${schools[activeSchool].name} · 手写心愿`;
+    $('viewer-wish-text').textContent = card.wish;
+    $('viewer-claim').href = claimUrl;
+    picture.alt = cardDescription(card, schools[activeSchool]); picture.style.opacity = '0';
     $('image-status').textContent = '正在展开这份心愿…';
     picture.onload = () => { picture.style.opacity = '1'; $('image-status').textContent = ''; fitImage(true); };
     picture.onerror = () => { picture.style.opacity = '0'; $('image-status').textContent = '图片暂未加载成功，请点击此处重试。'; $('image-status').style.pointerEvents = 'auto'; };
@@ -147,6 +162,7 @@
   function moveCard(delta) { activeIndex = (activeIndex + delta + schools[activeSchool].cards.length) % schools[activeSchool].cards.length; setCardHash(); renderViewer(); }
   function closeViewer() { closeOverlay(); if (ownHash) { ownHash = false; history.back(); } else history.replaceState(null, '', location.pathname + location.search); }
   $('viewer-close').onclick = closeViewer; $('viewer-prev').onclick = () => moveCard(-1); $('viewer-next').onclick = () => moveCard(1);
+  $('copy-number').onclick = () => copy(currentCard().number, `心愿编号 ${currentCard().number} 已复制，可前往问卷查找`);
   $('zoom-out').onclick = () => setZoom(zoom - .5); $('zoom-in').onclick = () => setZoom(zoom + .5); $('zoom-reset').onclick = () => setZoom(1);
   $('rotate').onclick = () => { rotation = (rotation + 90) % 360; fitImage(true); };
   window.addEventListener('resize', () => fitImage(true));
